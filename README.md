@@ -14,9 +14,10 @@ The Reset settings of this sketch, version V029, are optimised for the HC-12 tim
 
 
 
-![alt text](PCB-HC12-1.jpg)
+[Fritzing file here](Nano_ESP32-PCB_HC12.fzz)<br>
+![alt text](Pics/PCB-HC12-1.jpg)
 
-![alt text](IMG_6051(1)-1.JPG)
+![alt text](Pics/IMG_6051(1).JPG)
 
-![alt text](IMG_6050(1)-1.JPG)
+![alt text](Pics/IMG_6050(1).JPG)
 
