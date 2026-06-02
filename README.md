@@ -1,10 +1,16 @@
-# ESP32-HC12
+# Arduino Nano ESP32-HC12
 
 [Nederlandse tekst](#nederlandse-tekst)
 
-ESP32 Nano and HC12 module to send time to another micro controller via the RX port at 9600 baud.
+Arduino ESP32 Nano and HC12 module to send time to another micro controller via the RX port at 9600 baud.
+
+An arduino Nano Every using a DCF77 receiver and HC12 to broadcast time can be found here: [DCF77-HC12](https://github.com/ednieuw/DCF77_HC12).
 
 Time is sent in the format Thhmmss — for example T121500 means quarter past 12.
+
+To verify whether the two HC-12 modules are working, two INO sketches were created for the Nano ESP32.
+TestTwoHC12Modules.ino and TestTwoHC12Modules_time.ino. The second one sends the time format for the word clock.<br>
+<img src="Pics/IMG_6079(2).jpg" width="200">
 
 To update time on my [ATMEGA word clock designs](https://github.com/ednieuw/Woordklok-witte-LEDs) an Arduino Nano ESP32 is used to receive time with WiFi/NTP and send it with a HC-12 S14438 433 MHz long-range wireless serial module to the ATMEGA.
 
@@ -149,9 +155,15 @@ The RGB LED on the PCB indicates the current state of the device:
 
 ## Nederlandse tekst
 
-ESP32 Nano en HC-12 module om de tijd via de RX-poort op 9600 baud naar een andere microcontroller te sturen.
+Arduino ESP32 Nano en HC-12 module om de tijd naar een andere microcontroller te sturen.
+
+Een Arduino Nano Every die een DCF77-ontvanger en een HC12 gebruikt om de tijd te versturen is hier te vinden: [DCF77-HC12](https://github.com/ednieuw/DCF77_HC12).
 
 De tijd wordt verzonden in het formaat Thhmmss — bijvoorbeeld T121500 betekent kwart over twaalf.
+
+Om te controleren of de twee HC-12 modules wel werken zijn twee INO-sketches gemaakt voor de Nano ESP32.
+TestTwoHC12Modules.ino en TestTwoHC12Modules_time.ino. De tweede verstuurt het tijdformaat voor de woordklok.<br>
+<img src="Pics/IMG_6079(2).jpg" width="200">
 
 Voor het synchroniseren van mijn [ATMEGA woordklok-ontwerpen](https://github.com/ednieuw/Woordklok-witte-LEDs) wordt een Arduino Nano ESP32 gebruikt om via WiFi/NTP de tijd op te halen en deze via een HC-12 S14438 433 MHz langeafstands draadloze seriële module naar de ATMEGA te sturen.
 
@@ -203,7 +215,7 @@ De HC-12 module sluit je RX-pin aan op D4 van de Nano ESP32, communicatie op 960
 
 1. Flash de sketch met bovenstaande instellingen.
 2. Zet de stroom aan — de status-LED knippert tijdens het opstarten.
-3. Verbind je telefoon/laptop met het WiFi-netwerk `StartESP32Comm` (wachtwoord `esp32comm`).
+3. Verbind de telefoon/laptop met het WiFi-netwerk `StartESP32Comm` (wachtwoord `esp32comm`).
 4. Open een browser — er verschijnt een captive portal om je router-SSID en wachtwoord in te voeren. Of gebruik een BLE-terminal en stuur `A<ssid>` en daarna `B<wachtwoord>`.
 5. Stuur `@` om te herstarten. De ESP32 verbindt met je router en haalt de tijd op via NTP.
 6. Controleer of de groene LED brandt — WiFi is verbonden.
@@ -214,7 +226,7 @@ De HC-12 module sluit je RX-pin aan op D4 van de Nano ESP32, communicatie op 960
 
 ---
 
-## De Nano ESP32 verbinden met je WiFi-netwerk
+## De Nano ESP32 verbinden met het WiFi-netwerk
 
 ### BLE-terminal apps
 
@@ -225,15 +237,15 @@ De ESP32 zendt een BLE UART-service uit (Nordic UART, service UUID `6E400001-B5A
 - **LightBlue** (iOS / Android) — handig voor testen
 - De meegeleverde [BLE_UART_Terminal.html](BLE_UART_Terminal.html) — open in Chrome (desktop of Android); geen app-installatie nodig
 
-Verbind met het apparaat genaamd **ESP32Nano** (of de naam die je hebt ingesteld met menuopdracht `C`).
+Verbind met het apparaat genaamd **ESP32Nano** (of de naam die is ingesteld met menuopdracht `C`).
 
 ### Inloggen op een WiFi-netwerk
 
 Na de eerste flash start het apparaat in Access Point-modus met SSID `StartESP32Comm` en wachtwoord `esp32comm`. Verbind je telefoon of laptop met dat netwerk en open een browser om de inloggegevens in te stellen — of gebruik de BLE-terminal:
 
-1. Stuur `A` gevolgd door je SSID, bijv. `AMijnNetwerk`
-2. Stuur `B` gevolgd door je wachtwoord, bijv. `BMijnWachtwoord`
-3. Stuur `@` om de ESP32 te herstarten — hij verbindt dan met je router en haalt de tijd op via NTP.
+1. Stuur `A` gevolgd door de SSID, bijv. `AMijnNetwerk`
+2. Stuur `B` gevolgd door het wachtwoord, bijv. `BMijnWachtwoord`
+3. Stuur `@` om de ESP32 te herstarten — hij verbindt dan met de router en haalt de tijd op via NTP.
 
 Het IP-adres is te zien via het menu (`I` of `II`) — zoek naar de regel `IP-address:`. Eenmaal verbonden is de webinterface beschikbaar op dat adres via poort 80.
 
