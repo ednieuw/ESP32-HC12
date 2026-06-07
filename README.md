@@ -8,9 +8,11 @@ An arduino Nano Every using a DCF77 receiver and HC12 to broadcast time can be f
 
 Time is sent in the format Thhmmss — for example T121500 means quarter past 12.
 
-To verify whether the two HC-12 modules are working, two INO sketches were created for the Nano ESP32.
-TestTwoHC12Modules.ino and TestTwoHC12Modules_time.ino. The second one sends the time format for the word clock.<br>
-<img src="Pics/IMG_6079(2).jpg" width="200">
+To verify whether the two HC-12 modules are working, two INO sketches were created for the Nano ESP32 and one for the Arduino Nano.<br>
+*TestTwoHC12Modules.ino* and *TestTwoHC12Modules_time.ino* for the Nano ESP32.<br> 
+
+ The second one sends the time format for the word clock and is also available for the Nano (ATMEGA328) named *TestTwoHC12Modules_time_Nano.ino*.<br>
+<img src="Pics/IMG_6079(2).jpg" width="300">
 
 To update time on my [ATMEGA word clock designs](https://github.com/ednieuw/Woordklok-witte-LEDs) an Arduino Nano ESP32 is used to receive time with WiFi/NTP and send it with a HC-12 S14438 433 MHz long-range wireless serial module to the ATMEGA.
 
@@ -162,8 +164,11 @@ Een Arduino Nano Every die een DCF77-ontvanger en een HC12 gebruikt om de tijd t
 De tijd wordt verzonden in het formaat Thhmmss — bijvoorbeeld T121500 betekent kwart over twaalf.
 
 Om te controleren of de twee HC-12 modules wel werken zijn twee INO-sketches gemaakt voor de Nano ESP32.
-TestTwoHC12Modules.ino en TestTwoHC12Modules_time.ino. De tweede verstuurt het tijdformaat voor de woordklok.<br>
-<img src="Pics/IMG_6079(2).jpg" width="200">
+
+*TestTwoHC12Modules.ino* en *TestTwoHC12Modules_time.ino* voor de Nano ESP32 <br> 
+De tweede verstuurt het tijdformaat voor de woordklok en is er ook voor de Nano (ATMEGA328) genaamd *TestTwoHC12Modules_time_Nano.ino.*<br>
+
+<img src="Pics/IMG_6079(2).jpg" width="300">
 
 Voor het synchroniseren van mijn [ATMEGA woordklok-ontwerpen](https://github.com/ednieuw/Woordklok-witte-LEDs) wordt een Arduino Nano ESP32 gebruikt om via WiFi/NTP de tijd op te halen en deze via een HC-12 S14438 433 MHz langeafstands draadloze seriële module naar de ATMEGA te sturen.
 
