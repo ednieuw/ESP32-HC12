@@ -33,7 +33,9 @@
  Changes V027: Comparable with ESP32_WordClockV210
  Changes V028: Added HC-12 Time sender option   
  Changes V029: Special HC-12 version. Added HC-12 Time sender in menu
- 
+ Changes V030: SSID length >3 for P.Andries design
+
+
 *********************
 How to compile: 
 Install ESP32 boards
@@ -973,7 +975,7 @@ void ReworkInputString(String InputString)
   switch(toupper(InputString[0])) 
    {
     case 'A':                                                                                 // SSID setting
-      if(len > 4 && len < 30) 
+      if(len > 3 && len < 30) 
         {
         InputString.substring(1).toCharArray(Mem.SSID, len);
         snprintf(sptext, sizeof(sptext), "SSID set: %s", Mem.SSID);
