@@ -14,13 +14,16 @@ To verify whether the two HC-12 modules are working, two INO sketches were creat
  The second one sends the time format for the word clock and is also available for the Nano (ATMEGA328) named *TestTwoHC12Modules_time_Nano.ino*.<br>
 <img src="Pics/IMG_6079(2).jpg" width="300">
 
-To update time on my [ATMEGA word clock designs](https://github.com/ednieuw/Woordklok-witte-LEDs) an Arduino Nano ESP32 is used to receive time with WiFi/NTP and send it with a HC-12 S14438 433 MHz long-range wireless serial module to the ATMEGA.
+To update time on my [ATMEGA word clock designs](https://github.com/ednieuw/Woordklok-witte-LEDs) an Arduino Nano ESP32 is used to receive time with WiFi/NTP and send a time string with a HC-12 S14438 433 MHz long-range wireless serial module to the ATMEGA.
 
-The sketch is derived from [a larger common ESP32 communication project](https://github.com/ednieuw/ESP32Communications).
+Old word clock sketches were not able to receive a time string. A word clock sketch for the ATMEGA328 chip adapted to receive the time string is in this repository: Character_Clock_V117_PA02.<br> 
+Attach TXD of the HC12 to pin D6 of the ATMEGA328.
+
+The ESP32 Nano sketch is derived from [a larger common ESP32 communication project](https://github.com/ednieuw/ESP32Communications).
 
 The ESP32 communication project was stripped from my [Nano ESP32 word clock project](https://github.com/ednieuw/Arduino-ESP32-Nano-Wordclock) that contains (in 2026) the complete manual and instructions.
 
-The Reset settings of this sketch, version V029, are optimised for the HC-12 time sender: HC-12 is set ON by default after a reset.
+The Reset settings of this sketch, version V030, are optimised for the HC-12 time sender: HC-12 is set ON by default after a reset.
 
 [Fritzing file here](Nano_ESP32-PCB_HC12.fzz)
 
@@ -44,7 +47,7 @@ Use the Arduino IDE with the following board settings:
 | Pin Numbering | By Arduino pin (default) |
 | USB Mode | Normal (Tiny USB) |
 
-All required libraries are included in the zip file supplied with the sketch (`librariesV029.zip`). Install them via Arduino IDE → Sketch → Include Library → Add .ZIP Library.
+All required libraries are included in the zip file supplied with the sketch (`librariesV030.zip`). Install them via Arduino IDE → Sketch → Include Library → Add .ZIP Library.
 
 ---
 
@@ -171,6 +174,10 @@ De tweede verstuurt het tijdformaat voor de woordklok en is er ook voor de Nano 
 <img src="Pics/IMG_6079(2).jpg" width="300">
 
 Voor het synchroniseren van mijn [ATMEGA woordklok-ontwerpen](https://github.com/ednieuw/Woordklok-witte-LEDs) wordt een Arduino Nano ESP32 gebruikt om via WiFi/NTP de tijd op te halen en deze via een HC-12 S14438 433 MHz langeafstands draadloze seriële module naar de ATMEGA te sturen.
+
+Oude woordklok-sketches konden geen tijdstring ontvangen. Een woordklok-sketch voor de ATMEGA328-chip, aangepast om de tijdstring te ontvangen, staat in deze repository: Character_Clock_V117_PA02.<br>
+Sluit TXD van de HC-12 aan op pin D6 van de ATMEGA328.
+
 
 De sketch is afgeleid van [een groter ESP32-communicatieproject](https://github.com/ednieuw/ESP32Communications).
 
