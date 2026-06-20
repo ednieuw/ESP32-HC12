@@ -183,7 +183,7 @@ De sketch is afgeleid van [een groter ESP32-communicatieproject](https://github.
 
 Dat project is op zijn beurt afgesplitst van mijn [Nano ESP32 woordklok-project](https://github.com/ednieuw/Arduino-ESP32-Nano-Wordclock), waar de volledige handleiding en instructies te vinden zijn (bijgewerkt tot 2026).
 
-De standaardinstellingen van deze sketch, versie V029, zijn geoptimaliseerd voor de HC-12 tijdverzender: na een reset staat de HC-12 standaard **aan**.
+De standaardinstellingen van deze sketch, versie V030, zijn geoptimaliseerd voor de HC-12 tijdverzender: na een reset staat de HC-12 standaard **aan**.
 
 [Fritzing-bestand hier](Nano_ESP32-PCB_HC12.fzz)
 
