@@ -121,6 +121,21 @@ The `K` command controls how often the time is sent via HC-12 and logged:
 
 Once the word clock is running reliably after a day or so, switching to `K2` is advisable to reduce RF traffic.
 
+### Time transmission interval (K0 / K1 / K2)
+
+### Send commands T, K, L, M, N and O to Character_Clock_V117_PA03
+
+| Command | Description |
+|---|---|
+| `Thhmmss` | Time in hours, minutes, seconds |
+| `K` | Send clock command W (On/Off) to see the LDR reading every second |
+| `L` | Send lowest light intensity. L10 is a good start |
+| `M` | Send how fast the clock lights up. M50–80 are good to start |
+| `NHHhh` | Turn clock display off at HH and on at hh. For instance N2208 is off at 22 hour and on at 08 hour |
+| `O` | Turn the clock display On/Off |
+<br> 
+(Update to version Character_Clock_V117_PA03.ino otherwise these commands will not work!)
+
 ---
 
 ## Status LED colours
@@ -280,6 +295,19 @@ Met het `K`-commando stel je in hoe vaak de tijd via HC-12 wordt verzonden en ge
 - **`K0`** — zet tijdlogging en -verzending uit; vergelijkbaar met het uitschakelen van de HC-12-zender
 
 Zodra de woordklok na een dag of zo stabiel loopt, is overschakelen naar `K2` aan te raden.
+
+### Stuur commando's T, K, L, M, N en O naar Character_Clock_V117_PA03
+
+| Command | Beschrijving |
+|---|---|
+| `Thhmmss` | Tijd in uren, minuten, seconden |
+| `K` | Stuur clock-commando W (On/Off) om elke seconde de LDR-meting te zien |
+| `L` | Stuur laagste lichtintensiteit. L10 is een goed startpunt |
+| `M` | Stuur hoe snel de klok oplicht. M50–80 is een goed startpunt |
+| `NHHhh` | Zet klokdisplay uit om HH uur en aan om hh uur. Bijvoorbeeld N2208 is uit om 22 uur en aan om 08 uur |
+| `O` | Zet de klokdisplay aan/uit |
+<br> 
+(Update naar versie Character_Clock_V117_PA03.ino anders werken deze commando's niet!)
 
 ---
 
