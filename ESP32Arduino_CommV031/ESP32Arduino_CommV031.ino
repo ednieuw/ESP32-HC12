@@ -33,8 +33,8 @@
  Changes V027: Comparable with ESP32_WordClockV210
  Changes V028: Added HC-12 Time sender option   
  Changes V029: Special HC-12 version. Added HC-12 Time sender in menu
- Changes V030: SSID length >3 for P.Andries design
-
+ Changes V030: SSID length >3 for P.Andries design 
+ Changes V031: Send commands T, K, L, M, N and O to Character_Clock_V117_PA03
 
 *********************
 How to compile: 
@@ -421,7 +421,7 @@ struct    EEPROMstorage {                                                       
   int  IntFuture2       = 0;                                                                  // For future use
   byte TimeSender       = 0;                                                                  // 
   byte Ringbufcnt       = 0;                                                                  // Ringbuffer counter ON or OFF
-  byte HC12Time         = 0;                                                                  // For future use
+  byte HC12Time         = 0;                                                                  // Use HC12 module 
   byte byteFuture4      = 0;                                                                  // For future use
   byte HetIsWasOff      = 0;                                                                  // Turn On or Off HET IS WAS   
   byte EdSoftLEDSOn     = 0;                                                                  // EdSoft text on/off   
@@ -716,8 +716,8 @@ void Reset(void)
  Mem.WIFInoConnection = 0;                                                                    // Restarts after 30 minutes no connection 
  Mem.TimeReceiver     = 0;                                                                    // Use Time Sender app to set time 
  Mem.TimeSender       = 0;                                                                    // 
- Mem.Ringbufcnt       = 0;                                                                    // For future use
- Mem.HC12Time         = 1;                                                                    // For future use
+ Mem.Ringbufcnt       = 0;                                                                    // 
+ Mem.HC12Time         = 1;                                                                    // Use HC12 module 
  Mem.byteFuture4      = 0;                                                                    // For future use
  Mem.BLEOn            = 1;                                                                    // default BLE On
  Mem.UseBLELongString = 0;                                                                    // Default off. works only with iPhone/iPad with BLEserial app
@@ -1122,6 +1122,7 @@ void ReworkInputString(String InputString)
         {                                                                                     // Test LDR
          TestLDR = 1 - TestLDR;
          snprintf(sptext, sizeof(sptext), "TestLDR: %s", TestLDR ? "On\n   Bits, Out, loops per second and time" : "Off\n");
+         if(Mem.HC12Time)  Serial1.print("W"); //        if(Mem.HC12Time)  Serial1.print(InputString);
         }
        if(InputString.equalsIgnoreCase("K0"))                                                 // do not log
         {
@@ -1145,6 +1146,7 @@ void ReworkInputString(String InputString)
        {
         Mem.LowerBrightness = (byte)SConstrainInt(InputString, 1, 0, 250);
         snprintf(sptext, sizeof(sptext), "Lower brightness: %d bits", Mem.LowerBrightness);
+        if(Mem.HC12Time)  Serial1.println(InputString);
        } 
       else snprintf(sptext, sizeof(sptext), "**** Input fault. \nEnter Lnnn where n between 1 and 250");
       break;
@@ -1154,6 +1156,7 @@ void ReworkInputString(String InputString)
        {
         Mem.UpperBrightness = SConstrainInt(InputString, 1, 1, 255);
         snprintf(sptext, sizeof(sptext), "Upper brightness changed to: %d bits", Mem.UpperBrightness);
+        if(Mem.HC12Time)  Serial1.println(InputString);
        } 
       else snprintf(sptext, sizeof(sptext), "**** Input fault. \nEnter Mnnn where n between 1 and 255");
       break;
@@ -1169,20 +1172,19 @@ void ReworkInputString(String InputString)
       Mem.TurnOffLEDsAtHH = _min(Mem.TurnOffLEDsAtHH, 23);
       Mem.TurnOnLEDsAtHH  = _min(Mem.TurnOnLEDsAtHH, 23);
       snprintf(sptext, sizeof(sptext), "Display is OFF between %2d:00 and %2d:00", Mem.TurnOffLEDsAtHH, Mem.TurnOnLEDsAtHH);
+        if(Mem.HC12Time)  Serial1.println(InputString);
       break;
       
-    case 'O':                                                                                 // Turn On/Off Display
+case 'O':                                                                                 // Turn On/Off Display
       if(len == 1) 
        {
         LEDsAreOff = !LEDsAreOff;
-        snprintf(sptext, sizeof(sptext), "Display is %s", LEDsAreOff ? "OFF" : "ON");
+        if(Mem.HC12Time) {Serial1.println(InputString);}                                      // Send raw command to HC-12
         if(LEDsAreOff) { ClearScreen(); }
-        else 
-         {
-          Tekstprintln(sptext);
-          lastminute = 99;                                                                    // Force display update
-          sptext[0]=0;                                                                        // Suppress a second print of sptext
-         }
+        snprintf(sptext, sizeof(sptext), "Display is %s", LEDsAreOff ? "OFF" : "ON");
+        Tekstprintln(sptext);
+        lastminute = 99;                                                                    // Force display update
+        sptext[0]=0;                                                                        // Suppress a second print of sptext
        } 
       else snprintf(sptext, sizeof(sptext), "**** Length fault O. ****");
       break;
@@ -1246,6 +1248,7 @@ void ReworkInputString(String InputString)
         timeinfo.tm_min  = (int)SConstrainInt(InputString, 3, 5, 0, 59);
         timeinfo.tm_sec  = (int)SConstrainInt(InputString, 5, 7, 0, 59);
         SetRTCTime();                                                                         // Always sync ESP32 internal RTC
+        if(Mem.HC12Time)  Serial1.println(InputString.c_str());
         if(DS3231Installed)
          {
           SetDS3231Time();                                                                    // Write time to DS3231
@@ -1571,7 +1574,6 @@ int ReadLDR(void)
 {
  return analogRead(PhotoCellPin) / 16;
 }
-
 
 //--------------------------------------------                                                //
 // CLOCK Display the time 
@@ -3897,6 +3899,7 @@ void InitHC12(void)
 {
   Serial1.begin(9600, SERIAL_8N1, -1, HC12_TX);                                               // -1 = no RX
 }
+
 //--------------------------------------------                                                //
 // HC12 Send time via HC-12 half-duplex wireless serial communication module
 //--------------------------------------------
